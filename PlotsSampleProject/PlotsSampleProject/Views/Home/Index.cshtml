@@ -1,0 +1,288 @@
+﻿@using PlotsSampleProject.Models
+@model  FindNearByPlacesAndThings
+@{
+    ViewBag.Title = "Home Page";
+}
+    <div class="main-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="top-text header-text">
+                        <h6>Over 36,500+ Active Listings</h6>
+                        <h2>Find Nearby Places &amp; Things</h2>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <form id="search-form" name="gs" method="submit" role="search" action="#">
+                        <div class="row">
+                            <div class="col-lg-3 align-self-center">
+                                @Html.DropDownListFor(m => m.SelectAreas, new SelectList(ViewBag.Areas), "All Areas", htmlAttributes: new {  @class = "form-control"})
+                            </div>
+                            <div class="col-lg-3 align-self-center">
+                                @Html.TextBoxFor(m => m.EnterLocation, htmlAttributes:  new { @Class = "form-control", placeholder = "Enter a location" })
+                                @Html.ValidationMessageFor(m => m.EnterLocation, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-3 align-self-center">
+                                @Html.DropDownListFor(m => m.PriceRange, new SelectList(ViewBag.Pricelist), "Price Range", htmlAttributes: new { @class = "form-control" })
+                            </div>
+                            <div class="col-lg-3">
+                                <fieldset>
+                                    <button class="main-button"><i class="fa fa-search"></i> Search Now</button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-10 offset-lg-1">
+                    <ul class="categories">
+                        @foreach (var i in ViewBag.CategoryList)
+                        {                     
+                                <li><a href="#"><span class="icon"><img src=@i.CategoryImagePath alt=@i.CategoryTitle></span> @i.CategoryTitle</a></li>                           
+                        }
+                     </ul>
+                </div>
+            </div>
+         </div>
+    </div>
+
+    <div class="popular-categories">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h2>Popular Categories</h2>
+                        <h6>Check Them Out</h6>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="naccs">
+                        <div class="grid">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="menu">
+
+                                        @foreach (var i in ViewBag.CategoryList)
+                                        {
+                                            if (i.CategoryID == 1)
+                                            {
+
+                                            <div class="first-thumb active">
+                                                <div class="thumb">
+                                                    <span class="icon"><img src=@i.CategoryImagePath alt=""></span>
+                                                    @i.CategoryTitle
+                                                </div>
+                                            </div>
+
+                                            }
+                                            else if (i.CategoryID != 1 && i.CategoryID != 5)
+                                            {
+                                                <div>
+                                                    <div class="thumb">
+                                                        <span class="icon"><img src=@i.CategoryImagePath alt=""></span>
+                                                        @i.CategoryTitle
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="last-thumb">
+                                                    <div class="thumb">
+                                                        <span class="icon"><img src=@i.CategoryImagePath alt=""></span>
+                                                        @i.CategoryTitle
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                 </div>
+                                <div class="col-lg-9 align-self-center">
+                                    <ul class="nacc">
+                                        @foreach (var i in ViewBag.lst)
+                                        {
+                                            if (i.ID == 1)
+                                            {
+                                                <li class="active">
+                                                    <div>
+                                                        <div class="thumb">
+                                                            <div class="row">
+                                                                <div class="col-lg-5 align-self-center">
+                                                                    <div class="left-text">
+                                                                        <h4>@i.Title</h4>
+                                                                        <p>@i.Description</p>
+                                                                        <div class="main-white-button"><a href="#"><i class="fa fa-eye"></i>@i.ButtonValue</a></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-7 align-self-center">
+                                                                    <div class="right-image">
+                                                                        <img src=@i.ImagePath alt="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <div>
+                                                        <div class="thumb">
+                                                            <div class="row">
+                                                                <div class="col-lg-5 align-self-center">
+                                                                    <div class="left-text">
+                                                                        <h4>@i.Title</h4>
+                                                                        <p>@i.Description</p>
+                                                                        <div class="main-white-button"><a href="#"><i class="fa fa-eye"></i>@i.ButtonValue</a></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-7 align-self-center">
+                                                                    <div class="right-image">
+                                                                        <img src=@i.ImagePath alt="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }                                       
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="recent-listing">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h2>Recent Listing</h2>
+                        <h6>Check Them Out</h6>
+
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="owl-carousel owl-listing">
+                        <div class="item">
+                            <div class="row">
+                                @foreach (var i in ViewBag.RecentList)
+                                {
+                                    if(i.RecentListingID == 1 || i.RecentListingID == 2 || i.RecentListingID == 3)
+                                    {
+                                    <div class="col-lg-12">
+                                        <div class="listing-item">
+                                            <div class="left-image">
+                                                <a href="#"><img src=@i.RecentListingImagePath alt=""></a>
+                                            </div>
+                                            <div class="right-content align-self-center">
+                                                <a href="#"><h4>@i.RecentListingTitle</h4></a>
+                                                <h6>by: @i.RecentListingSellBy</h6>
+                                                <ul class="rate">
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li>@i.RecentListingReviews</li>
+                                                </ul>
+                                                <span class="price"><div class="icon"><img src=@i.RecentListingIconImagePath1 alt=""></div>@i.RecentListingIconImagePath1Details</span>
+                                                <span class="details">Details: <em>@i.RecentListingDescription</em></span>
+                                                <ul class="info">
+                                                    <li><img src=@i.RecentListingIconImagePath2 alt="">@i.RecentListingIconImagePath2Details</li>
+                                                    <li><img src=@i.RecentListingIconImagePath3 alt="">@i.RecentListingIconImagePath3Details</li>
+                                                </ul>
+                                                <div class="main-white-button">
+                                                    <a href="./Home/Contact"><i class="fa fa-eye"></i>Contact Now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                }
+                             </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                @foreach (var i in ViewBag.RecentList)
+                                {
+                                    if (i.RecentListingID == 4 || i.RecentListingID == 5 || i.RecentListingID == 6)
+                                    {
+                                        <div class="col-lg-12">
+                                            <div class="listing-item">
+                                                <div class="left-image">
+                                                    <a href="#"><img src=@i.RecentListingImagePath alt=""></a>
+                                                </div>
+                                                <div class="right-content align-self-center">
+                                                    <a href="#"><h4>@i.RecentListingTitle</h4></a>
+                                                    <h6>by: @i.RecentListingSellBy</h6>
+                                                    <ul class="rate">
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li>@i.RecentListingReviews</li>
+                                                    </ul>
+                                                    <span class="price"><div class="icon"><img src=@i.RecentListingIconImagePath1 alt=""></div>@i.RecentListingIconImagePath1Details</span>
+                                                    <span class="details">Details: <em>@i.RecentListingDescription</em></span>
+                                                    <ul class="info">
+                                                        <li><img src=@i.RecentListingIconImagePath2 alt="">@i.RecentListingIconImagePath2Details</li>
+                                                        <li><img src=@i.RecentListingIconImagePath3 alt="">@i.RecentListingIconImagePath3Details</li>
+                                                    </ul>
+                                                    <div class="main-white-button">
+                                                        <a href="./Home/Contact"><i class="fa fa-eye"></i>Contact Now</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                @foreach (var i in ViewBag.RecentList)
+                                {
+                                    if (i.RecentListingID == 7 || i.RecentListingID == 8 || i.RecentListingID == 9)
+                                    {
+                                        <div class="col-lg-12">
+                                            <div class="listing-item">
+                                                <div class="left-image">
+                                                    <a href="#"><img src=@i.RecentListingImagePath alt=""></a>
+                                                </div>
+                                                <div class="right-content align-self-center">
+                                                    <a href="#"><h4>@i.RecentListingTitle</h4></a>
+                                                    <h6>by: @i.RecentListingSellBy</h6>
+                                                    <ul class="rate">
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li>@i.RecentListingReviews</li>
+                                                    </ul>
+                                                    <span class="price"><div class="icon"><img src=@i.RecentListingIconImagePath1 alt=""></div>@i.RecentListingIconImagePath1Details</span>
+                                                    <span class="details">Details: <em>@i.RecentListingDescription</em></span>
+                                                    <ul class="info">
+                                                        <li><img src=@i.RecentListingIconImagePath2 alt="">@i.RecentListingIconImagePath2Details</li>
+                                                        <li><img src=@i.RecentListingIconImagePath3 alt="">@i.RecentListingIconImagePath3Details</li>
+                                                    </ul>
+                                                    <div class="main-white-button">
+                                                        <a href="./Home/Contact"><i class="fa fa-eye"></i>Contact Now</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
